@@ -131,15 +131,15 @@ export default function HomePage(){
 
     <section className="nipe-dark px-4 py-16 md:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><span className="nipe-section-label !text-[#f3c969]">Academic programme</span><h2 className="nipe-title mt-2 text-3xl font-semibold sm:text-4xl md:mt-3">Build your path in physical education.</h2></div><Link href="/courses" className="text-sm font-bold text-[#f3c969] hover:text-white">View all academics →</Link></div>
-        <div className="mt-10 grid gap-5">{programmes.map(p=><Link key={p.code} href={p.href} className="nipe-dark-card group rounded-2xl p-7 md:flex md:items-center md:justify-between"><div><span className="text-sm font-black tracking-widest text-[#f3c969]">{p.code}</span><h3 className="nipe-display mt-2 text-2xl font-bold">{p.title}</h3><p className="mt-3 max-w-2xl text-sm leading-6 text-blue-100">{p.text}</p></div><span className="mt-6 inline-block text-[#f3c969] md:mt-0 md:text-2xl">→</span></Link>)}</div>
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><span className="nipe-section-label !text-[#f3c969]">Academic programme</span><h2 className="nipe-title mt-2 text-3xl font-semibold sm:text-4xl md:mt-3">Build your path in physical education.</h2></div><span className="text-sm font-bold text-[#f3c969]">Academic programme</span></div>
+        <div className="mt-10 grid gap-5">{programmes.map(p=><div key={p.code} className="nipe-dark-card rounded-2xl p-7 md:flex md:items-center md:justify-between"><div><span className="text-sm font-black tracking-widest text-[#f3c969]">{p.code}</span><h3 className="nipe-display mt-2 text-2xl font-bold">{p.title}</h3><p className="mt-3 max-w-2xl text-sm leading-6 text-blue-100">{p.text}</p></div></div>)}</div>
       </div>
     </section>
 
     <footer className="bg-[#071128] px-4 py-10 text-white md:px-8">
       <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-3">
         <div><div className="flex items-center gap-3"><span className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#e0af43]/60 bg-white font-black text-[#0b1736]">N</span><strong className="tracking-[.14em] text-[#f3c969]">NIPE</strong></div><p className="mt-4 max-w-sm text-sm leading-6 text-blue-100">Noble Institute of Physical Education — academic learning, sport and leadership in one connected campus.</p></div>
-        <div><h3 className="font-bold text-[#f3c969]">Explore</h3><div className="mt-3 grid gap-2 text-sm text-blue-100"><Link href="/about" className="hover:text-white">About NIPE</Link><Link href="/courses" className="hover:text-white">Academics</Link><Link href="/activities" className="hover:text-white">Sports & Activities</Link><Link href="/admissions" className="hover:text-white">Admissions</Link></div></div>
+        <div><h3 className="font-bold text-[#f3c969]">Explore</h3><div className="mt-3 grid gap-2 text-sm text-blue-100"><span>About NIPE</span><span>Academics</span><span>Sports & Activities</span><span>Admissions</span></div></div>
         <div><h3 className="font-bold text-[#f3c969]">Digital Campus</h3><div className="mt-3 grid gap-2 text-sm text-blue-100"><Link href="/student/login" className="hover:text-white">Student Portal</Link><Link href="/faculty/login" className="hover:text-white">Faculty Portal</Link><Link href="/admin/login" className="hover:text-white">Administration</Link></div></div>
       </div>
       <div className="mx-auto mt-10 max-w-7xl border-t border-white/10 pt-5 text-xs text-blue-200">© 2026 Noble Institute of Physical Education. All rights reserved.</div>
