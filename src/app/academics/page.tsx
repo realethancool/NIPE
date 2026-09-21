@@ -130,6 +130,6 @@ export default function AcademicsPage(){
    </div>
   </section>
 
-  <footer className="bg-[#071128] px-4 py-8 text-center text-xs text-blue-200 md:px-8">© 2026 Noble Institute of Physical Education · Academic Programme</footer>
+  <footer className="bg-[#071128] px-4 py-10 text-white md:px-8"><div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 sm:flex-row"><div className="flex items-center gap-3"><img src="/images/logo.png" alt="Noble Institute of Physical Education Logo" className="h-11 w-auto object-contain" /><div><strong className="block text-sm tracking-[.12em] text-[#f3c969]">Noble Institute of Physical Education</strong><span className="mt-1 block text-xs text-blue-200">Academic Programme</span></div></div><span className="text-xs text-blue-200">© 2026 Noble Institute of Physical Education. All rights reserved.</span></div></footer>
  </main>
 }
