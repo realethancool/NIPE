@@ -46,9 +46,8 @@ export default function HomePage(){
           <span><strong className="block text-sm tracking-[.16em] text-[#e0af43]">Noble Institute of Physical Education</strong><small className="block text-[9px] font-semibold tracking-[.13em] text-white/90"></small></span>
         </Link>
         <nav className="hidden items-center gap-1 lg:flex">
-          {[
-            'About','Academics','Sports & Activities','Admissions','Faculty'
-          ].map(label=><span key={label} className="cursor-default rounded-lg px-3 py-2 text-sm font-semibold text-white/90">{label}</span>)}
+          {['About','Sports & Activities','Admissions','Faculty'].map(label=><span key={label} className="cursor-default rounded-lg px-3 py-2 text-sm font-semibold text-white/90">{label}</span>)}
+          <Link href="/academics" className="rounded-lg bg-white/10 px-3 py-2 text-sm font-semibold text-[#f3c969] hover:bg-white/15">Academics</Link>
         </nav>
         <div className="hidden items-center gap-2 lg:flex">
           <Link href="/student/login" className="rounded-lg border border-[#e0af43] px-4 py-2 text-sm font-semibold text-[#f3c969] hover:bg-[#e0af43] hover:text-[#0b1736]">Student Login</Link>
@@ -57,9 +56,7 @@ export default function HomePage(){
         <button className="nipe-mobile rounded-lg border border-white/15 px-3 py-2 text-white" onClick={()=>setOpen(!open)} aria-label="Open menu">{open?'✕':'☰'}</button>
       </div>
       {open&&<div className="nipe-mobile border-t border-white/10 px-4 pb-4 pt-2">
-        {[
-          'About','Academics','Sports & Activities','Admissions','Faculty'
-        ].map(label=><span key={label} className="block cursor-default border-b border-white/10 py-3 font-semibold text-white">{label}</span>)}
+        <Link href="/academics" className="block border-b border-white/10 py-3 font-semibold text-[#f3c969]">Academics</Link>{['About','Sports & Activities','Admissions','Faculty'].map(label=><span key={label} className="block cursor-default border-b border-white/10 py-3 font-semibold text-white">{label}</span>)}
       </div>}
     </header>
 
