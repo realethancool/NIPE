@@ -52,7 +52,7 @@ export default function HomePage(){
         </nav>
         <div className="hidden items-center gap-2 lg:flex">
           <Link href="/student/login" className="rounded-lg border border-[#e0af43] px-4 py-2 text-sm font-semibold text-[#f3c969] hover:bg-[#e0af43] hover:text-[#0b1736]">Student Login</Link>
-          <Link href="/admissions" className="rounded-lg bg-[#e0af43] px-5 py-2 text-sm font-bold text-[#0b1736] hover:bg-[#f3c969]">Apply Now →</Link>
+          <span className="cursor-default rounded-lg bg-[#e0af43] px-5 py-2 text-sm font-bold text-[#0b1736]">Apply Now →</span>
         </div>
         <button className="nipe-mobile rounded-lg border border-white/15 px-3 py-2 text-white" onClick={()=>setOpen(!open)} aria-label="Open menu">{open?'✕':'☰'}</button>
       </div>
@@ -68,14 +68,14 @@ export default function HomePage(){
       <div className="relative z-10 mx-auto grid max-w-7xl gap-12 px-4 py-20 md:px-8 md:py-28 lg:grid-cols-[1.15fr_.85fr] lg:items-center">
         <div className="max-w-3xl text-white">
           <span className="nipe-kicker">Future-focused physical education</span>
-          <h1 className="nipe-title mt-7 text-5xl font-semibold leading-[.98] md:text-7xl">Move with purpose.<br/><span className="text-[#e0af43] italic">Lead with confidence.</span></h1>
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-blue-100">Noble Institute of Physical Education brings academic learning, practical sport and leadership development together in one connected campus experience.</p>
-          <div className="mt-9 flex flex-wrap gap-3">
-            <span className="nipe-btn-primary rounded-xl px-6 py-3.5 font-bold">Explore Admissions →</span>
-            <span className="nipe-btn-ghost rounded-xl px-6 py-3.5 font-semibold">View Programme</span>
+          <h1 className="nipe-title mt-6 text-4xl font-semibold leading-[1.02] sm:text-5xl md:mt-7 md:text-7xl">Move with purpose.<br/><span className="text-[#e0af43] italic">Lead with confidence.</span></h1>
+          <p className="mt-6 max-w-2xl text-base leading-7 text-blue-100 sm:text-lg md:mt-7 md:leading-8">Noble Institute of Physical Education brings academic learning, practical sport and leadership development together in one connected campus experience.</p>
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row md:mt-9">
+            <span className="nipe-btn-primary rounded-xl px-5 py-3 text-sm font-bold sm:px-6 sm:py-3.5 sm:text-base">Explore Admissions →</span>
+            <span className="nipe-btn-ghost rounded-xl px-5 py-3 text-sm font-semibold sm:px-6 sm:py-3.5 sm:text-base">View Programme</span>
           </div>
-          <div className="mt-12 grid max-w-2xl grid-cols-3 gap-6 border-t border-white/15 pt-7">
-            <div className="nipe-stat"><strong className="nipe-display text-3xl text-[#f3c969]">B.P.Ed.</strong><span className="mt-1 block text-xs text-blue-100">Core programme</span></div>
+          <div className="mt-9 grid max-w-2xl grid-cols-3 gap-3 sm:gap-6 md:mt-12 border-t border-white/15 pt-7">
+            <div className="nipe-stat"><strong className="nipe-display text-2xl text-[#f3c969] sm:text-3xl">B.P.Ed.</strong><span className="mt-1 block text-xs text-blue-100">Core programme</span></div>
             <div className="nipe-stat"><strong className="nipe-display text-3xl text-[#f3c969]">2026–27</strong><span className="mt-1 block text-xs text-blue-100">Admission cycle</span></div>
             <div className="nipe-stat"><strong className="nipe-display text-3xl text-[#f3c969]">NIPE</strong><span className="mt-1 block text-xs text-blue-100">Noble campus</span></div>
           </div>
@@ -96,10 +96,10 @@ export default function HomePage(){
 
     <section className="bg-[#f8f5ed] px-4 py-16 md:px-8 md:py-24">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-8 flex flex-col justify-between gap-3 md:flex-row md:items-end">
+        <div className="mb-6 flex flex-col justify-between gap-3 md:flex-row md:items-end">
           <div>
             <span className="nipe-section-label">Important Notice</span>
-            <h2 className="nipe-title mt-3 text-4xl font-semibold md:text-5xl">Infrastructure &amp; Survey Details</h2>
+            <h2 className="nipe-title mt-2 text-3xl font-semibold sm:text-4xl md:mt-3 md:text-5xl">Infrastructure &amp; Survey Details</h2>
           </div>
           <span className="text-xs font-bold uppercase tracking-[.16em] text-[#8b6239]">Noble Institute of Physical Education</span>
         </div>
@@ -112,7 +112,7 @@ export default function HomePage(){
 
     <section className="bg-[#f8f5ed] px-4 py-16 md:px-8 md:py-20">
       <div className="mx-auto max-w-7xl">
-        <div className="max-w-2xl"><span className="nipe-section-label">The NIPE approach</span><h2 className="nipe-title mt-3 text-4xl font-semibold md:text-5xl">Education that happens beyond the classroom.</h2><div className="nipe-line mt-6 w-32"/><p className="mt-5 leading-7 text-[#66728a]">A focused identity for physical education: practical learning, active participation and the confidence to take responsibility.</p></div>
+        <div className="max-w-2xl"><span className="nipe-section-label">The NIPE approach</span><h2 className="nipe-title mt-2 text-3xl font-semibold sm:text-4xl md:mt-3 md:text-5xl">Education that happens beyond the classroom.</h2><div className="nipe-line mt-6 w-32"/><p className="mt-5 leading-7 text-[#66728a]">A focused identity for physical education: practical learning, active participation and the confidence to take responsibility.</p></div>
         <div className="mt-10 grid gap-4 md:grid-cols-3">{pillars.map(([n,t,d])=><article key={n} className="nipe-card p-7"><span className="text-sm font-black text-[#e0af43]">{n}</span><h3 className="nipe-display mt-5 text-2xl font-bold">{t}</h3><p className="mt-3 text-sm leading-6 text-[#66728a]">{d}</p></article>)}</div>
       </div>
     </section>
@@ -121,7 +121,7 @@ export default function HomePage(){
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
         <div className="nipe-dark rounded-[28px] p-8 md:p-10">
           <span className="nipe-section-label !text-[#f3c969]">Campus life</span>
-          <h2 className="nipe-title mt-3 text-4xl font-semibold">An active environment for active learners.</h2>
+          <h2 className="nipe-title mt-2 text-3xl font-semibold sm:text-4xl md:mt-3">An active environment for active learners.</h2>
           <p className="mt-5 leading-7 text-blue-100">Explore an academic setting designed around physical education, sport, participation and student development.</p>
           <Link href="/lab-facilities" className="mt-7 inline-flex rounded-xl bg-white px-5 py-3 font-bold text-[#0b1736] hover:bg-[#f3c969]">Explore Facilities →</Link>
         </div>
@@ -131,7 +131,7 @@ export default function HomePage(){
 
     <section className="nipe-dark px-4 py-16 md:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><span className="nipe-section-label !text-[#f3c969]">Academic programme</span><h2 className="nipe-title mt-3 text-4xl font-semibold">Build your path in physical education.</h2></div><Link href="/courses" className="text-sm font-bold text-[#f3c969] hover:text-white">View all academics →</Link></div>
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><span className="nipe-section-label !text-[#f3c969]">Academic programme</span><h2 className="nipe-title mt-2 text-3xl font-semibold sm:text-4xl md:mt-3">Build your path in physical education.</h2></div><Link href="/courses" className="text-sm font-bold text-[#f3c969] hover:text-white">View all academics →</Link></div>
         <div className="mt-10 grid gap-5">{programmes.map(p=><Link key={p.code} href={p.href} className="nipe-dark-card group rounded-2xl p-7 md:flex md:items-center md:justify-between"><div><span className="text-sm font-black tracking-widest text-[#f3c969]">{p.code}</span><h3 className="nipe-display mt-2 text-2xl font-bold">{p.title}</h3><p className="mt-3 max-w-2xl text-sm leading-6 text-blue-100">{p.text}</p></div><span className="mt-6 inline-block text-[#f3c969] md:mt-0 md:text-2xl">→</span></Link>)}</div>
       </div>
     </section>
