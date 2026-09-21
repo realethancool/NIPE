@@ -91,21 +91,42 @@ export default function HomePage(){
             <button disabled={busy} className="nipe-btn-primary w-full rounded-xl py-3.5 font-bold disabled:opacity-60">{busy?'Submitting…':'Submit Enquiry →'}</button>
           </form>
           <div className="mt-7 border-t border-[#d9ddd6] pt-6">
-            <div className="flex items-start justify-between gap-4">
+            <div className="mb-4 flex items-end justify-between gap-4">
               <div>
-                <span className="nipe-section-label">Infrastructure & Survey</span>
-                <h3 className="nipe-display mt-2 text-2xl font-bold text-[#0b1736]">NIPE Campus Details</h3>
+                <span className="nipe-section-label">Important Notice</span>
+                <h3 className="nipe-display mt-2 text-2xl font-bold text-[#0b1736]">Infrastructure &amp; Survey Details</h3>
               </div>
-              <span className="rounded-full border border-[#b9824b]/30 bg-[#f8f5ed] px-3 py-1 text-[10px] font-bold uppercase tracking-[.14em] text-[#8b6239]">Proposed</span>
+              <span className="hidden text-[10px] font-bold uppercase tracking-[.16em] text-[#8b6239] sm:block">Noble Institute of Physical Education</span>
             </div>
-            <div className="mt-5 space-y-3 text-sm text-slate-600">
-              <div className="rounded-xl border border-slate-200 bg-[#fbfaf6] p-4">
-                <p className="font-bold text-[#0b1736]">B.P.Ed. Building</p>
-                <p className="mt-1">Survey No. <strong>1698</strong> · NCTE Fresh Recognition Applied</p>
-              </div>
-              <div className="rounded-xl border border-slate-200 bg-[#fbfaf6] p-4">
-                <p className="font-bold text-[#0b1736]">Sports Ground / Physical Activities</p>
-                <p className="mt-1">Survey Nos. <strong>970 &amp; 972</strong> · Sports Area as per NCTE norms</p>
+            <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[640px] border-collapse text-left text-xs md:text-sm">
+                  <thead>
+                    <tr className="bg-[#102a2e] text-white">
+                      <th className="px-4 py-3 font-bold">Sr. No.</th>
+                      <th className="px-4 py-3 font-bold">Institute / Facility</th>
+                      <th className="px-4 py-3 font-bold">Status</th>
+                      <th className="px-4 py-3 font-bold">Survey No.</th>
+                      <th className="px-4 py-3 font-bold">Remarks</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-200">
+                    <tr className="align-top">
+                      <td className="px-4 py-4 font-semibold text-[#8b6239]">01</td>
+                      <td className="px-4 py-4 font-semibold text-[#0b1736]">B.P.Ed. Building</td>
+                      <td className="px-4 py-4"><span className="inline-flex rounded-full border border-[#b9824b]/30 bg-[#f8f5ed] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[#8b6239]">Proposed</span></td>
+                      <td className="px-4 py-4 font-semibold text-slate-700">1698</td>
+                      <td className="px-4 py-4 leading-5 text-slate-600">NCTE – Fresh Recognition Applied</td>
+                    </tr>
+                    <tr className="align-top bg-[#fbfaf6]">
+                      <td className="px-4 py-4 font-semibold text-[#8b6239]">02</td>
+                      <td className="px-4 py-4 font-semibold text-[#0b1736]">Sports Ground / Physical Activities</td>
+                      <td className="px-4 py-4"><span className="inline-flex rounded-full border border-[#b9824b]/30 bg-[#f8f5ed] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[#8b6239]">Proposed</span></td>
+                      <td className="px-4 py-4 font-semibold text-slate-700">970 &amp; 972</td>
+                      <td className="px-4 py-4 leading-5 text-slate-600">Sports Area as per NCTE norms</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
