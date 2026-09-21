@@ -1,0 +1,490 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPER_ADMIN
+  CONTENT_ADMIN
+  MEDIA_MANAGER
+  VIEWER
+}
+
+enum ContentStatus {
+  DRAFT
+  SCHEDULED
+  PUBLISHED
+  EXPIRED
+}
+
+enum ERPUserStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+}
+
+enum ResultStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model AdminUser {
+  id                 String         @id @default(cuid())
+  email              String         @unique
+  username           String         @unique
+  passwordHash       String
+  role               Role           @default(VIEWER)
+  mfaEnabled         Boolean        @default(false)
+  mfaSecret          String?
+  lastLogin          DateTime?
+  failedLoginAttempts Int           @default(0)
+  lockedUntil        DateTime?
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+  pagesCreated       Page[]         @relation("pageCreator")
+  pagesUpdated       Page[]         @relation("pageUpdater")
+  media              Media[]        
+  announcements      Announcement[]
+  news               News[]
+  events             Event[]
+  auditLogs          AuditLog[]
+  revisions          Revision[]
+}
+
+model Page {
+  id             String        @id @default(cuid())
+  title          String
+  slug           String        @unique
+  content        Json
+  status         ContentStatus @default(DRAFT)
+  seoTitle       String?
+  seoDescription String?
+  ogImage        String?
+  canonicalUrl   String?
+  publishedAt    DateTime?
+  scheduledFor   DateTime?
+  createdBy      AdminUser     @relation("pageCreator", fields: [createdById], references: [id])
+  createdById    String
+  updatedBy      AdminUser     @relation("pageUpdater", fields: [updatedById], references: [id])
+  updatedById    String
+  sections       PageSection[]
+  revisions      Revision[]
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+model PageSection {
+  id        String   @id @default(cuid())
+  pageId    String
+  page      Page     @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  type      String
+  content   Json
+  order     Int
+  isVisible Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([pageId, order])
+}
+
+model Media {
+  id            String    @id @default(cuid())
+  filename      String
+  originalName  String
+  mimeType      String
+  size          Int
+  path          String
+  thumbnailPath String?
+  folder        String    @default("root")
+  altText       String?
+  caption       String?
+  uploadedBy    AdminUser @relation(fields: [uploadedById], references: [id])
+  uploadedById  String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([folder])
+}
+
+model Announcement {
+  id              String        @id @default(cuid())
+  title           String
+  shortDescription String
+  content         String
+  image           String?
+  category        String
+  ctaText         String?
+  ctaUrl          String?
+  status          ContentStatus @default(DRAFT)
+  startDate       DateTime?
+  endDate         DateTime?
+  priority        Int           @default(0)
+  createdBy       AdminUser     @relation(fields: [createdById], references: [id])
+  createdById     String
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model News {
+  id            String        @id @default(cuid())
+  title         String
+  slug          String        @unique
+  content       String
+  excerpt       String?
+  featuredImage String?
+  category      String?
+  status        ContentStatus @default(DRAFT)
+  publishedAt   DateTime?
+  scheduledFor  DateTime?
+  createdBy     AdminUser     @relation(fields: [createdById], references: [id])
+  createdById   String
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model Event {
+  id            String        @id @default(cuid())
+  title         String
+  slug          String        @unique
+  description   String
+  startDate     DateTime
+  endDate       DateTime?
+  location      String?
+  featuredImage String?
+  status        ContentStatus @default(DRAFT)
+  createdBy     AdminUser     @relation(fields: [createdById], references: [id])
+  createdById   String
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model Revision {
+  id               String    @id @default(cuid())
+  pageId           String
+  page             Page      @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  content          Json
+  version          Int
+  changeDescription String?
+  createdBy        AdminUser @relation(fields: [createdById], references: [id])
+  createdById      String
+  createdAt        DateTime  @default(now())
+
+  @@index([pageId, version])
+}
+
+model AuditLog {
+  id           String    @id @default(cuid())
+  adminId      String
+  admin        AdminUser @relation(fields: [adminId], references: [id])
+  action       String
+  targetEntity String?
+  targetId     String?
+  ipAddress    String?
+  userAgent    String?
+  result       String
+  timestamp    DateTime  @default(now())
+
+  @@index([adminId, timestamp])
+  @@index([action, timestamp])
+}
+
+model SiteSettings {
+  id                    String   @id @default(cuid())
+  siteName              String   @default("Noble Institute of Physical Education")
+  siteDescription       String
+  logo                  String?
+  favicon               String?
+  maintenanceMode       Boolean  @default(false)
+  seoDefaultTitle       String?
+  seoDefaultDescription String?
+  contactEmail          String?
+  contactPhone          String?
+  socialLinks           String?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model AdmissionEnquiry {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  phone       String
+  programme   String
+  status      String   @default("pending")
+  message     String?
+  ipAddress   String?
+  userAgent   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([status, createdAt])
+  @@index([email])
+}
+
+model AdmissionApplication {
+  id                    String   @id @default(cuid())
+  applicationNumber     String   @unique
+  publicToken           String   @unique
+  name                  String
+  age                   Int
+  phone                 String
+  email                 String
+  preferredCourse       String
+  caste                 String
+  status                String   @default("pending")
+  ipAddress             String?
+  userAgent             String?
+
+  casteCertificate      Bytes?
+  casteCertificateName  String?
+  casteCertificateMime  String?
+  tenthMarksheet        Bytes?
+  tenthMarksheetName    String?
+  tenthMarksheetMime    String?
+  twelfthMarksheet      Bytes?
+  twelfthMarksheetName  String?
+  twelfthMarksheetMime  String?
+  schoolLeaving         Bytes?
+  schoolLeavingName     String?
+  schoolLeavingMime     String?
+  incomeCertificate     Bytes?
+  incomeCertificateName String?
+  incomeCertificateMime String?
+  aadharCard            Bytes?
+  aadharCardName        String?
+  aadharCardMime        String?
+  passportPhoto1        Bytes?
+  passportPhoto1Name    String?
+  passportPhoto1Mime    String?
+  passportPhoto2        Bytes?
+  passportPhoto2Name    String?
+  passportPhoto2Mime    String?
+  passportPhoto3        Bytes?
+  passportPhoto3Name    String?
+  passportPhoto3Mime    String?
+  passportPhoto4        Bytes?
+  passportPhoto4Name    String?
+  passportPhoto4Mime    String?
+  allotmentLetter       Bytes?
+  allotmentLetterName   String?
+  allotmentLetterMime   String?
+  nonCreamyLayer        Bytes?
+  nonCreamyLayerName    String?
+  nonCreamyLayerMime    String?
+
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@index([status, createdAt])
+  @@index([email])
+  @@index([phone])
+}
+
+model Department {
+  id         String      @id @default(cuid())
+  name       String
+  code       String      @unique
+  active     Boolean     @default(true)
+  programmes Programme[]
+  subjects   Subject[]
+  students   Student[]
+  faculty    Faculty[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+model Programme {
+  id           String     @id @default(cuid())
+  name         String
+  code         String     @unique
+  departmentId String
+  department   Department @relation(fields: [departmentId], references: [id])
+  semesters    Semester[]
+  students     Student[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@index([departmentId])
+}
+
+model Semester {
+  id         String    @id @default(cuid())
+  number     Int
+  programmeId String
+  programme  Programme @relation(fields: [programmeId], references: [id], onDelete: Cascade)
+  subjects   Subject[]
+  students   Student[]
+
+  @@unique([programmeId, number])
+}
+
+model Subject {
+  id              String          @id @default(cuid())
+  code            String
+  name            String
+  credits         Int             @default(0)
+  departmentId    String
+  department      Department      @relation(fields: [departmentId], references: [id])
+  semesterId      String
+  semester        Semester        @relation(fields: [semesterId], references: [id])
+  facultySubjects FacultySubject[]
+  timetable       Timetable[]
+  attendance      Attendance[]
+  resultSubjects  ResultSubject[]
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@unique([departmentId, code])
+}
+
+model Faculty {
+  id              String          @id @default(cuid())
+  employeeNumber  String          @unique
+  name            String
+  email           String          @unique
+  passwordHash    String
+  phone           String?
+  departmentId    String
+  department      Department      @relation(fields: [departmentId], references: [id])
+  status          ERPUserStatus   @default(ACTIVE)
+  facultySubjects FacultySubject[]
+  timetable       Timetable[]
+  attendance      Attendance[]
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+}
+
+model FacultySubject {
+  id        String  @id @default(cuid())
+  facultyId String
+  faculty   Faculty @relation(fields: [facultyId], references: [id], onDelete: Cascade)
+  subjectId String
+  subject   Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@unique([facultyId, subjectId])
+}
+
+model Student {
+  id               String        @id @default(cuid())
+  enrollmentNumber String        @unique
+  admissionNumber  String?       @unique
+  name             String
+  passwordHash     String
+  photoUrl         String?
+  email            String?       @unique
+  phone            String?
+  age              Int?
+  address          String?
+  departmentId     String
+  department       Department    @relation(fields: [departmentId], references: [id])
+  programmeId      String
+  programme        Programme     @relation(fields: [programmeId], references: [id])
+  semesterId       String
+  semester         Semester      @relation(fields: [semesterId], references: [id])
+  admissionYear    Int?
+  status           ERPUserStatus @default(ACTIVE)
+  attendance       Attendance[]
+  results          Result[]
+  fees             FeeAccount?
+  timetable        Timetable[]   @relation("studentTimetable")
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+}
+
+model Timetable {
+  id         String   @id @default(cuid())
+  dayOfWeek  Int
+  startTime  String
+  endTime    String
+  room       String?
+  subjectId  String
+  subject    Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  facultyId  String
+  faculty    Faculty  @relation(fields: [facultyId], references: [id])
+  studentId  String?
+  student    Student? @relation("studentTimetable", fields: [studentId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+
+  @@index([facultyId, dayOfWeek])
+  @@index([studentId, dayOfWeek])
+}
+
+model Attendance {
+  id        String           @id @default(cuid())
+  date      DateTime
+  period    Int
+  status    AttendanceStatus
+  studentId String
+  student   Student          @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  subjectId String
+  subject   Subject          @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  facultyId String
+  faculty   Faculty          @relation(fields: [facultyId], references: [id])
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  @@unique([studentId, subjectId, date, period])
+  @@index([studentId, date])
+  @@index([subjectId, date])
+}
+
+model Result {
+  id             String         @id @default(cuid())
+  semesterNumber Int
+  sgpa           Float?
+  cgpa           Float?
+  status         ResultStatus   @default(DRAFT)
+  studentId      String
+  student        Student        @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  subjects       ResultSubject[]
+  publishedAt    DateTime?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@unique([studentId, semesterNumber])
+}
+
+model ResultSubject {
+  id         String  @id @default(cuid())
+  resultId   String
+  result     Result  @relation(fields: [resultId], references: [id], onDelete: Cascade)
+  subjectId  String
+  subject    Subject @relation(fields: [subjectId], references: [id])
+  marks      Float?
+  grade      String?
+  gradePoint Float?
+  credits    Int     @default(0)
+
+  @@unique([resultId, subjectId])
+}
+
+model FeeAccount {
+  id            String        @id @default(cuid())
+  studentId     String        @unique
+  student       Student       @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  totalAmount   Float         @default(0)
+  paidAmount    Float         @default(0)
+  pendingAmount Float         @default(0)
+  dueDate       DateTime?
+  payments      FeePayment[]
+  updatedAt     DateTime      @updatedAt
+  createdAt     DateTime      @default(now())
+}
+
+model FeePayment {
+  id           String      @id @default(cuid())
+  feeAccountId String
+  feeAccount   FeeAccount  @relation(fields: [feeAccountId], references: [id], onDelete: Cascade)
+  amount       Float
+  paymentDate  DateTime    @default(now())
+  reference    String?
+  note         String?
+}
