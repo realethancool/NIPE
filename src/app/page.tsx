@@ -90,6 +90,25 @@ export default function HomePage(){
             <select required value={form.programme} onChange={e=>setForm({...form,programme:e.target.value})}><option value="">Select programme</option><option value="B.P.Ed.">B.P.Ed. — Bachelor of Physical Education</option></select>
             <button disabled={busy} className="nipe-btn-primary w-full rounded-xl py-3.5 font-bold disabled:opacity-60">{busy?'Submitting…':'Submit Enquiry →'}</button>
           </form>
+          <div className="mt-7 border-t border-[#d9ddd6] pt-6">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <span className="nipe-section-label">Infrastructure & Survey</span>
+                <h3 className="nipe-display mt-2 text-2xl font-bold text-[#0b1736]">NIPE Campus Details</h3>
+              </div>
+              <span className="rounded-full border border-[#b9824b]/30 bg-[#f8f5ed] px-3 py-1 text-[10px] font-bold uppercase tracking-[.14em] text-[#8b6239]">Proposed</span>
+            </div>
+            <div className="mt-5 space-y-3 text-sm text-slate-600">
+              <div className="rounded-xl border border-slate-200 bg-[#fbfaf6] p-4">
+                <p className="font-bold text-[#0b1736]">B.P.Ed. Building</p>
+                <p className="mt-1">Survey No. <strong>1698</strong> · NCTE Fresh Recognition Applied</p>
+              </div>
+              <div className="rounded-xl border border-slate-200 bg-[#fbfaf6] p-4">
+                <p className="font-bold text-[#0b1736]">Sports Ground / Physical Activities</p>
+                <p className="mt-1">Survey Nos. <strong>970 &amp; 972</strong> · Sports Area as per NCTE norms</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
