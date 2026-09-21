@@ -43,7 +43,7 @@ export default function HomePage(){
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-8">
         <Link href="/" className="flex items-center gap-3">
           <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#e0af43]/60 bg-white text-xl font-black text-[#0b1736]">N</span>
-          <span><strong className="block text-sm tracking-[.16em] text-[#e0af43]">NOBLE GROUP</strong><small className="block text-[9px] font-semibold tracking-[.13em] text-white/90">INSTITUTE OF PHYSICAL EDUCATION</small></span>
+          <span><strong className="block text-sm tracking-[.16em] text-[#e0af43]">Noble Institute of Physical Education</strong><small className="block text-[9px] font-semibold tracking-[.13em] text-white/90"></small></span>
         </Link>
         <nav className="hidden items-center gap-1 lg:flex">
           {[
