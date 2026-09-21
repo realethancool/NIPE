@@ -47,8 +47,8 @@ export default function HomePage(){
         </Link>
         <nav className="hidden items-center gap-1 lg:flex">
           {[
-            ['About','/about'],['Academics','/courses'],['Sports & Activities','/activities'],['Admissions','/admissions'],['Faculty','/faculty']
-          ].map(([label,href])=><Link key={href} href={href} className="rounded-lg px-3 py-2 text-sm font-semibold text-white/90 hover:bg-white/10 hover:text-[#f3c969]">{label}</Link>)}
+            'About','Academics','Sports & Activities','Admissions','Faculty'
+          ].map(label=><span key={label} className="cursor-default rounded-lg px-3 py-2 text-sm font-semibold text-white/90">{label}</span>)}
         </nav>
         <div className="hidden items-center gap-2 lg:flex">
           <Link href="/student/login" className="rounded-lg border border-[#e0af43] px-4 py-2 text-sm font-semibold text-[#f3c969] hover:bg-[#e0af43] hover:text-[#0b1736]">Student Login</Link>
@@ -58,8 +58,8 @@ export default function HomePage(){
       </div>
       {open&&<div className="nipe-mobile border-t border-white/10 px-4 pb-4 pt-2">
         {[
-          ['About','/about'],['Academics','/courses'],['Sports & Activities','/activities'],['Admissions','/admissions'],['Faculty','/faculty'],['Student Login','/student/login']
-        ].map(([label,href])=><Link key={href} onClick={()=>setOpen(false)} href={href} className="block border-b border-white/10 py-3 font-semibold text-white">{label}</Link>)}
+          'About','Academics','Sports & Activities','Admissions','Faculty'
+        ].map(label=><span key={label} className="block cursor-default border-b border-white/10 py-3 font-semibold text-white">{label}</span>)}
       </div>}
     </header>
 
@@ -71,8 +71,8 @@ export default function HomePage(){
           <h1 className="nipe-title mt-7 text-5xl font-semibold leading-[.98] md:text-7xl">Move with purpose.<br/><span className="text-[#e0af43] italic">Lead with confidence.</span></h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-blue-100">Noble Institute of Physical Education brings academic learning, practical sport and leadership development together in one connected campus experience.</p>
           <div className="mt-9 flex flex-wrap gap-3">
-            <Link href="/admissions" className="nipe-btn-primary rounded-xl px-6 py-3.5 font-bold">Explore Admissions →</Link>
-            <Link href="/courses" className="nipe-btn-ghost rounded-xl px-6 py-3.5 font-semibold">View Programme</Link>
+            <span className="nipe-btn-primary rounded-xl px-6 py-3.5 font-bold">Explore Admissions →</span>
+            <span className="nipe-btn-ghost rounded-xl px-6 py-3.5 font-semibold">View Programme</span>
           </div>
           <div className="mt-12 grid max-w-2xl grid-cols-3 gap-6 border-t border-white/15 pt-7">
             <div className="nipe-stat"><strong className="nipe-display text-3xl text-[#f3c969]">B.P.Ed.</strong><span className="mt-1 block text-xs text-blue-100">Core programme</span></div>
