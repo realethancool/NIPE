@@ -90,12 +90,25 @@ export default function HomePage(){
             <select required value={form.programme} onChange={e=>setForm({...form,programme:e.target.value})}><option value="">Select programme</option><option value="B.P.Ed.">B.P.Ed. — Bachelor of Physical Education</option></select>
             <button disabled={busy} className="nipe-btn-primary w-full rounded-xl py-3.5 font-bold disabled:opacity-60">{busy?'Submitting…':'Submit Enquiry →'}</button>
           </form>
-          <div className="mt-7 border-t border-[#d9ddd6] pt-6">
-            <img src="/images/infrastructure-survey-notice.svg" alt="Important Notice: Infrastructure and Survey Details for Noble Institute of Physical Education" className="block h-auto w-full rounded-2xl border border-[#b9824b]/30 shadow-sm" />
-          </div>
         </div>
       </div>
     </section>
+
+    <section className="bg-[#f8f5ed] px-4 py-16 md:px-8 md:py-24">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-8 flex flex-col justify-between gap-3 md:flex-row md:items-end">
+          <div>
+            <span className="nipe-section-label">Important Notice</span>
+            <h2 className="nipe-title mt-3 text-4xl font-semibold md:text-5xl">Infrastructure &amp; Survey Details</h2>
+          </div>
+          <span className="text-xs font-bold uppercase tracking-[.16em] text-[#8b6239]">Noble Institute of Physical Education</span>
+        </div>
+        <div className="overflow-hidden rounded-[28px] bg-white p-3 shadow-sm md:p-5">
+          <img src="/images/infrastructure-survey-notice.svg" alt="Important Notice: Infrastructure and Survey Details for Noble Institute of Physical Education" className="block h-auto w-full" />
+        </div>
+      </div>
+    </section>
+
 
     <section className="bg-[#f8f5ed] px-4 py-16 md:px-8 md:py-20">
       <div className="mx-auto max-w-7xl">
